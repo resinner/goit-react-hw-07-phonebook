@@ -1,13 +1,13 @@
-import styles from './Filter.module.scss';
-
 import { useDispatch } from 'react-redux';
 import { setFilterContacts } from '../../redux/filtersSlice';
+
+import styles from './Filter.module.scss';
 
 export default function Filter() {
   const dispatch = useDispatch();
 
-    const handlerFilter = evt => {
-      dispatch(setFilterContacts(evt.target.value));
+    const handlerFilter = e => {
+      dispatch(setFilterContacts(e.target.value));
     };
 
   return (

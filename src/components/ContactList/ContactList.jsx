@@ -1,18 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsSlice';
+import { deleteContact } from '../../redux/operations';
+import { toast } from 'react-toastify';
+import { selectContacts, selectContactsFilter } from '../../redux/selectors';
 
 import styles from './ContactList.module.scss';
 
 export default function ContactList() {
-  const contacts = useSelector(state => state.contacts);
-  const filterValue = useSelector(state => state.filters.filter).toLowerCase();
+  const contacts = useSelector(selectContacts);
+  const filterValue = useSelector(selectContactsFilter).toLowerCase();
 
   const dispatch = useDispatch();
 
-  const handleDelete = evt => {
-    dispatch(deleteContact(evt.target.id));
+  const handleDelete = e => {
+    dispatch(deleteContact(e.target.id));
     // toast.info(`This contact is delited from your phonebook!`);
-    alert(`This contact is delited from your phonebook!`);
+      toast.info(`This contact is delited from your phonebook!`);
   };
 
   const getVisibilityContacts = () => {

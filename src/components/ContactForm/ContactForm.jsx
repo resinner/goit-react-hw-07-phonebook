@@ -1,15 +1,17 @@
-import styles from './ContactForm.module.scss';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/operations';
+import { toast } from 'react-toastify';
+import { selectContacts } from '../../redux/selectors';
+
+import styles from './ContactForm.module.scss';
 
 export default function ContactForm() {
     const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(selectContacts);
   
-    function handlerSubmit(evt) {
-      evt.preventDefault();
-      const form = evt.target;
+    function handlerSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
       const name = form.name.value;
       const contact = form.number.value;
 
@@ -18,12 +20,12 @@ export default function ContactForm() {
           contact => contact.name.toLowerCase() === name.toLowerCase()
         )
       ) {
-        return alert(`${name} is alredy in contacts.`);
+        return toast.warn(`${name} is alredy in contacts.`);
       }
 
-      dispatch(addContact(name, contact));
+      dispatch(addContact({ name, contact }));
 
-     alert(`${name} is added to the contact list!`);
+   toast.success(`${name} is added to the contact list!`);
 
       form.reset();
     }
@@ -36,7 +38,7 @@ export default function ContactForm() {
           type="text"
           name="name"
           className={styles.input}
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
         />
