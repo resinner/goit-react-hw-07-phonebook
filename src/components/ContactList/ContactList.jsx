@@ -13,7 +13,7 @@ export default function ContactList() {
 
   const handleDelete = e => {
     dispatch(deleteContact(e.target.id));
-    // toast.info(`This contact is delited from your phonebook!`);
+
       toast.info(`This contact is delited from your phonebook!`);
   };
 
@@ -34,8 +34,8 @@ export default function ContactList() {
       {visibilityContacts.map(contact => (
         <li className={styles.item} key={contact.id}>
           <span className={styles.name}>{contact.name}: </span>
-          <a href={`tel:${contact.number}`} className={styles.number}>
-            {contact.number}
+          <a href={`tel:${contact.phone}`} className={styles.number}>
+            {contact.phone}
           </a>
           <button
             className={styles.button}

@@ -13,7 +13,7 @@ export default function ContactForm() {
       e.preventDefault();
       const form = e.target;
       const name = form.name.value;
-      const contact = form.number.value;
+      const phone = form.number.value;
 
       if (
         contacts.find(
@@ -23,7 +23,7 @@ export default function ContactForm() {
         return toast.warn(`${name} is alredy in contacts.`);
       }
 
-      dispatch(addContact({ name, contact }));
+      dispatch(addContact({ name, phone }));
 
    toast.success(`${name} is added to the contact list!`);
 
@@ -38,8 +38,8 @@ export default function ContactForm() {
           type="text"
           name="name"
           className={styles.input}
-          // pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
       </label>
@@ -50,7 +50,7 @@ export default function ContactForm() {
           name="number"
           className={styles.input}
           pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
-          title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
       </label>
